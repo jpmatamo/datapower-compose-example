@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+    datapower:
+        image: jpmatamo/datapower-compose
+        environment:
+            - DATAPOWER_ACCEPT_LICENSE=true
+            - DATAPOWER_INTERACTIVE=true
+            - DATAPOWER_WORKER_THREADS=4
+        ports:
+            - "9090:9090"
+            - "9095-9099"
+            - "443"
+        container_name: datapower
+        tty: true
+        stdin_open: true
+        links:
+            - backend
+            
+    backend:
+        image: hstenzel/nodejs-hostname
+        ports:
+            - "8080"
+
+
